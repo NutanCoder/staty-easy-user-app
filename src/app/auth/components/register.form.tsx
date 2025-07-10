@@ -9,6 +9,7 @@ function RegisterFeature() {
       <form className="space-y-4">
         <Input
           label="Email"
+          name="email"
           type="email"
           className="w-full px-3 py-2 border rounded"
           placeholder="Enter Email"
@@ -17,6 +18,7 @@ function RegisterFeature() {
         <Input
           label="Password"
           type="password"
+          name="password"
           placeholder="Enter Password"
           className="w-full px-3 py-2 border rounded"
           required
