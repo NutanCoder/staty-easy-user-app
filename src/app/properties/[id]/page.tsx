@@ -3,11 +3,7 @@ import { supabaseClient } from "@/lib/supabaseClient";
 import { Metadata } from "next";
 import React from "react";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   const { data, error } = await supabaseClient
     .from("properties")
     .select("title, description")
