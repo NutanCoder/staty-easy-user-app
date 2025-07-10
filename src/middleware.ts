@@ -31,11 +31,11 @@ export async function middleware(req: NextRequest) {
   return res;
 }
 
-export const config = {
-  matcher: [
-    ROUTES.LOGIN,
-    ROUTES.REGISTER,
-    ROUTES.FORGET_PASSWORD,
-    ROUTES.DASHBOARD,
-  ],
-};
+// export const config = {
+//   matcher: [
+//     ROUTES.LOGIN,
+//     ROUTES.REGISTER,
+//     ROUTES.FORGET_PASSWORD,
+//     ROUTES.DASHBOARD,
+//   ],
+// };
