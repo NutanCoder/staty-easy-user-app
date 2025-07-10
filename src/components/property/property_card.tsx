@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 
-export function PropertyCard({ property, viewMode = "card" }) {
+export function PropertyCard({ property }: any) {
   const randomBgUrl = useMemo(
     () =>
       `https://picsum.photos/1600/900?random=${Math.floor(
@@ -32,9 +32,7 @@ export function PropertyCard({ property, viewMode = "card" }) {
         <img
           src={property.imageUrl || randomBgUrl}
           alt={property.title}
-          className={`w-full ${
-            viewMode === "grid" ? "h-48" : "h-72"
-          } object-cover`}
+          className={`w-full h-72 object-cover`}
         />
         <div className="p-4">
           <div className="flex justify-between items-start mb-2">
