@@ -11,8 +11,7 @@ export const metadata: Metadata = {
 function HomePage() {
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navbar />
-      <div className="text-center mt-20">
+      <div className="text-center pt-20">
         <h1 className="text-5xl font-bold text-blue-700">Stay Easy PG</h1>
         <p className="mt-4 text-gray-600">
           Comfortable & Affordable Paying Guest Homes

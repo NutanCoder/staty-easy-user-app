@@ -1,15 +1,16 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { createServerSupabaseClient } from "@/lib/supabaseServer";
+import { supabaseServer } from "@/lib/supabaseServer";
 
 export async function loginAction(formData: FormData): Promise<void> {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  const supabase = createServerSupabaseClient();
-
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const { error } = await supabaseServer.auth.signInWithPassword({
+    email,
+    password,
+  });
 
   if (error) {
     redirect(`/auth/login?error=${encodeURIComponent(error.message)}`);
@@ -18,13 +19,15 @@ export async function loginAction(formData: FormData): Promise<void> {
   redirect("/dashboard");
 }
 
+export async function logoutAction() {
+  await supabaseServer.auth.signOut();
+  redirect("/");
+}
 export async function registerAction(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  const supabase = createServerSupabaseClient();
-
-  const { error } = await supabase.auth.signUp({ email, password });
+  const { error } = await supabaseServer.auth.signUp({ email, password });
 
   if (error) {
     return { error: error.message };
