@@ -2,14 +2,9 @@ import Link from "next/link";
 import { useMemo } from "react";
 
 export function PropertyCard({ property }: any) {
-  const randomBgUrl = useMemo(
-    () =>
-      `https://picsum.photos/1600/900?random=${Math.floor(
-        Math.random() * 1000
-      )}`,
-    []
-  );
-
+  const randomBgUrl = `https://picsum.photos/1600/900?random=${Math.floor(
+    Math.random() * 1000
+  )}`;
   const getStatusStyles = (status: string) => {
     switch (status) {
       case "available":
