@@ -1,6 +1,6 @@
 import { PropertyCard } from "@/components/property/property_card";
 import { ROUTES } from "@/lib/routes/routes";
-import { supabaseServer } from "@/lib/supabaseServer";
+import { supabaseClient } from "@/lib/supabaseClient";
 import Link from "next/link";
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default async function PropertiesPage() {
-  const { data: properties, error } = await supabaseServer
+  const { data: properties, error } = await supabaseClient
     .from("properties")
     .select("*")
     .order("created_at", { ascending: false });
@@ -53,7 +53,9 @@ export default async function PropertiesPage() {
 
       {properties.length === 0 && (
         <div className="text-center py-12">
-          <h3 className="text-lg font-medium text-gray-900">No properties found</h3>
+          <h3 className="text-lg font-medium text-gray-900">
+            No properties found
+          </h3>
           <p className="mt-2 text-sm text-gray-500">
             Try adjusting your filters or check back later for new listings.
           </p>

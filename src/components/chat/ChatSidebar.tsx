@@ -25,7 +25,7 @@ const ChatSidebar: FC<ChatSidebarProps> = ({ contacts, selectedContactId }) => {
       </div>
       <div className="overflow-y-auto h-[calc(100vh-10rem)] gap-2">
         {contacts.map((contact) => (
-          <Link href={ROUTES.getChatWithUser(contact.id)} key={contact.id}>
+          <Link href={ROUTES.CHAT.DETAIL(contact.id)} key={contact.id}>
             <div
               className={clsx(
                 "p-4 w-full text-left hover:bg-gray-100 transition-colors",
