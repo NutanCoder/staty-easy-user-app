@@ -1,54 +1,49 @@
 import PropertyDetailCard from "@/components/property/propert_detail_card";
-import { supabaseClient } from "@/lib/supabaseClient";
-import { Metadata } from "next";
-import React from "react";
+import { ROUTES } from "@/lib/routes/routes";
+import { supabaseServer } from "@/lib/supabaseServer";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
-export async function generateMetadata({ params }: any): Promise<Metadata> {
-  const { data, error } = await supabaseClient
-    .from("properties")
-    .select("title, description")
-    .eq("id", params.id)
-    .single();
-
-  if (!data || error) {
-    return {
-      title: "Property Not Found",
-      description: "No details found for this property.",
-    };
-  }
-
-  return {
-    title: data.title,
-    description: data.description,
-    openGraph: {
-      title: data.title,
-      description: data.description,
-    },
+interface PropertyPageProps {
+  params: {
+    id: string;
   };
 }
 
-async function Page(props: any) {
-  const randomBgUrl = `https://picsum.photos/1600/900?random=${Math.floor(
-    Math.random() * 1000
-  )}`;
-
-  const { id } = props.params;
-  const { data, error } = await supabaseClient
+export default async function PropertyPage({ params }: PropertyPageProps) {
+  const { data: property, error } = await supabaseServer
     .from("properties")
-    .select()
-    .eq("id", id);
-  if (error) {
-    return <h1>{error.message}</h1>;
+    .select("*")
+    .eq("id", params.id)
+    .single();
+
+  if (error || !property) {
+    notFound();
   }
-  if (data.length == 0) {
-    return <h1>No Data Found</h1>;
-  }
-  const property = data[0];
+
   return (
-    <div className="container mx-auto max-w-3xl my-4">
-      <PropertyDetailCard property={property} defaultImageUrl={randomBgUrl} />
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mb-6">
+        <Link
+          href={ROUTES.PROPERTIES.LIST}
+          className="text-indigo-600 hover:text-indigo-500 flex items-center"
+        >
+          <svg
+            className="h-5 w-5 mr-2"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Properties
+        </Link>
+      </div>
+
+      <PropertyDetailCard property={property} />
     </div>
   );
 }
-
-export default Page;

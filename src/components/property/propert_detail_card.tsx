@@ -1,4 +1,7 @@
+import { ROUTES } from "@/lib/routes/routes";
 import clsx from "clsx";
+import Link from "next/link";
+import Button from "../button";
 
 export default function PropertyDetailCard(props: any) {
   const { property, defaultImageUrl } = props;
@@ -29,14 +32,26 @@ export default function PropertyDetailCard(props: any) {
       <div className="p-6">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
           <h1 className="text-2xl font-bold">{property.title}</h1>
-          <span
-            className={clsx(
-              "text-sm font-semibold px-3 py-1 rounded-full border",
-              getStatusStyle(property.status)
+          <div className="flex items-center gap-3">
+            <span
+              className={clsx(
+                "text-sm font-semibold px-3 py-1 rounded-full border",
+                getStatusStyle(property.status)
+              )}
+            >
+              {property.status}
+            </span>
+            {property.owner_id && (
+              <Link href={ROUTES.getChatWithUser(property.owner_id)}>
+                <Button className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  Chat with Owner
+                </Button>
+              </Link>
             )}
-          >
-            {property.status}
-          </span>
+          </div>
         </div>
 
         <p className="text-gray-700 mb-4">{property.description}</p>

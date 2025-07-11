@@ -1,6 +1,3 @@
-import Link from "next/link";
-import { useMemo } from "react";
-
 export function PropertyCard({ property }: any) {
   const randomBgUrl = `https://picsum.photos/1600/900?random=${Math.floor(
     Math.random() * 1000
@@ -19,10 +16,7 @@ export function PropertyCard({ property }: any) {
   };
 
   return (
-    <Link
-      href={`/properties/${property.id}`}
-      className="no-underline text-inherit h-full shadow"
-    >
+    <div className="no-underline text-inherit h-full shadow">
       <div className="rounded  hover:shadow-lg transition duration-200 overflow-hidden cursor-pointer">
         <img
           src={property.imageUrl || randomBgUrl}
@@ -55,6 +49,6 @@ export function PropertyCard({ property }: any) {
           </p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
