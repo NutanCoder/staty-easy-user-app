@@ -1,11 +1,11 @@
 import PropertyDetailCard from "@/components/property/propert_detail_card";
 import { ROUTES } from "@/lib/routes/routes";
-import { supabaseServer } from "@/lib/supabaseServer";
+import { supabaseClient } from "@/lib/supabaseClient";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export default async function PropertyPage({ params }: any) {
-  const { data: property, error } = await supabaseServer
+  const { data: property, error } = await supabaseClient
     .from("properties")
     .select("*")
     .eq("id", params.id)
