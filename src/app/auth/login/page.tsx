@@ -16,7 +16,7 @@ function Page() {
         <Link href={ROUTES.HOME} className="flex gap-2">
           Home
         </Link>
-        <Link href={ROUTES.REGISTER} className="flex">
+        <Link href={ROUTES.AUTH.REGISTER} className="flex">
           New User! Register
         </Link>
       </div>

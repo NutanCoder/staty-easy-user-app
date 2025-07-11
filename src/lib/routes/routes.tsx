@@ -1,24 +1,31 @@
 export const ROUTES = {
-  HOME: '/',
+  HOME: "/",
   AUTH: {
-    LOGIN: '/auth/login',
-    REGISTER: '/auth/register',
+    LOGIN: "/auth/login",
+    REGISTER: "/auth/register",
   },
-  DASHBOARD: '/dashboard',
+  DASHBOARD: "/dashboard",
+  CHAT: {
+    LIST: "/chat",
+    DETAIL: (id: string) => `/chat/${id}`,
+  },
   PROPERTIES: {
-    LIST: '/properties',
+    LIST: "/properties",
     DETAIL: (id: string) => `/properties/${id}`,
   },
-  PG: '/pg',
+  PG: "/pg",
 } as const;
 
 // Type for route parameters
 export type RouteParams = {
-  'properties/:id': { id: string };
+  "properties/:id": { id: string };
 };
 
 // Helper function to generate route with params
-export function generateRoute(route: string, params: Record<string, string>): string {
+export function generateRoute(
+  route: string,
+  params: Record<string, string>
+): string {
   return Object.entries(params).reduce(
     (path, [key, value]) => path.replace(`:${key}`, value),
     route
@@ -26,35 +33,38 @@ export function generateRoute(route: string, params: Record<string, string>): st
 }
 
 // Navigation guard types
-export type AuthRequirement = 'AUTH_REQUIRED' | 'NO_AUTH_REQUIRED' | 'OPTIONAL';
+export type AuthRequirement = "AUTH_REQUIRED" | "NO_AUTH_REQUIRED" | "OPTIONAL";
 
 // Route metadata
-export const ROUTE_META: Record<string, { 
-  authRequired: AuthRequirement;
-  title: string;
-}> = {
+export const ROUTE_META: Record<
+  string,
+  {
+    authRequired: AuthRequirement;
+    title: string;
+  }
+> = {
   [ROUTES.HOME]: {
-    authRequired: 'OPTIONAL',
-    title: 'Home',
+    authRequired: "OPTIONAL",
+    title: "Home",
   },
   [ROUTES.AUTH.LOGIN]: {
-    authRequired: 'NO_AUTH_REQUIRED',
-    title: 'Login',
+    authRequired: "NO_AUTH_REQUIRED",
+    title: "Login",
   },
   [ROUTES.AUTH.REGISTER]: {
-    authRequired: 'NO_AUTH_REQUIRED',
-    title: 'Register',
+    authRequired: "NO_AUTH_REQUIRED",
+    title: "Register",
   },
   [ROUTES.DASHBOARD]: {
-    authRequired: 'AUTH_REQUIRED',
-    title: 'Dashboard',
+    authRequired: "AUTH_REQUIRED",
+    title: "Dashboard",
   },
   [ROUTES.PROPERTIES.LIST]: {
-    authRequired: 'OPTIONAL',
-    title: 'Properties',
+    authRequired: "OPTIONAL",
+    title: "Properties",
   },
   [ROUTES.PG]: {
-    authRequired: 'OPTIONAL',
-    title: 'PG Accommodations',
+    authRequired: "OPTIONAL",
+    title: "PG Accommodations",
   },
 };

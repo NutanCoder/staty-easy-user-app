@@ -4,13 +4,7 @@ import { supabaseServer } from "@/lib/supabaseServer";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-interface PropertyPageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function PropertyPage({ params }: PropertyPageProps) {
+export default async function PropertyPage({ params }: any) {
   const { data: property, error } = await supabaseServer
     .from("properties")
     .select("*")
